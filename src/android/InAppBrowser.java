@@ -968,7 +968,14 @@ public class InAppBrowser extends CordovaPlugin {
             String newloc = "";
             if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
                 newloc = url;
-            } else if (url.startsWith(WebView.SCHEME_TEL)) {
+            }else if(url.startsWith("pluspasapp:"){
+		    
+	    Intent intent = new Intent(Intent.ACTION_VIEW);
+                   intent.setData(Uri.parse(url));
+                   cordova.getActivity().startActivity(intent);
+                   return true;
+		    
+	    }else if (url.startsWith(WebView.SCHEME_TEL)) {
                 try {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     intent.setData(Uri.parse(url));
